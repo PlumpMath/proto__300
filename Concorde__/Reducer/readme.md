@@ -1,0 +1,6 @@
+# Reducer
+
+
+Keep in mind that we can define as many api surfaces as we need, at different layers.
+
+For example, we have a listener to `primus` which `dispatch`es an `action` with a `spark` as payload. The `action.type` will be evaluated to a function on a `_handlers` object, which corresponds to a particular control-surface (like an API layer is a control-surface).  In this case the task of the reducer is to file the `spark` into `State`, where it can be accessed, and to `desire` a particular side-effect, namely that a listener be setup on the `spark`, which will `dispatch` an action also, this time with `spark_id` in the payload to index the particular connection.  In this case, there is no reason to define all the possible activities (in Reducer) related to the `spark` message from client on that same surface.  We can index another `event_type` in the payload on `spark`'s `data` object to another control-surface.  If we're talking about `proto-user`, then immediately it makes sense to define a surface that's oriented around them and their use-cases.  Notice that these new layers are not accessed by `actions` (indexed by `action.type`) directly, but they are organised in a similar way, with indexing by `type`/`event_type`.
