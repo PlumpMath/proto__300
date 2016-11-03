@@ -11,11 +11,11 @@ redis = new Redis()
 
 
 
-getStateCache = ({ cb, ccc }) ->
+getStateCache = ({ cb, c }) ->
     # for now it's simple.
     redis.get 'state__cache', (err, state__cache) ->
         if err then c err else
-            cb { state__cache, ccc }
+            cb { state__cache, c }
     # maybe a bunch of transactions to grab, parse assemble
 
 CCC_F = ({ arq }) ->
@@ -27,5 +27,5 @@ CCC_F = ({ arq }) ->
 
 module.exports = ({ cb }) ->
     arq = {} # can define some parameters to CCC_F if needed.
-    ccc = CCC_F { arq }
-    getStateCache { cb, ccc }
+    c = CCC_F { arq }
+    getStateCache { cb, c }

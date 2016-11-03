@@ -18,7 +18,7 @@ module.exports = ({ proto__primus, brujo__primus }) ->
     dispatch = (opts) ->
         Dispatch.emit 'new_action', {action: opts}
 
-    callback__from__hell = ({ state__cache, c }) ->
+    cb = ({ state__cache, c }) ->
         State = initial__state = require('./modules/initial__state__.coffee')({ state__cache, proto__primus, brujo__primus })
         side__effects = require('./Side__Effects/index.coffee').default({ Dispatch, c })
         action_counter = 0
@@ -33,4 +33,4 @@ module.exports = ({ proto__primus, brujo__primus }) ->
 
         side__effects { State, c }
 
-    require('./modules/brujo__log__env__redis/index.coffee') { cb: callback__from__hell }
+    require('./modules/brujo__log__env__redis/index.coffee') { cb }
