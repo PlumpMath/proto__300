@@ -7,9 +7,6 @@ Desire = Desire_Imm
 
 Redis = require 'ioredis'
 
-
-
-
 getCacheImm = ({ state__cache }) ->
     # state_cache is assumed to be pretty raw unprocessed Redis derived data-structures.
     # We process to Immutable structure ready for setIn() on State.

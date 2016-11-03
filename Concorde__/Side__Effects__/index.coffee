@@ -1,4 +1,4 @@
-c = console.log.bind console
+co = console.log.bind console
 color = require 'bash-color'
 Imm = require 'immutable'
 _ = require 'lodash'
@@ -17,7 +17,7 @@ _handlers = assign _handlers, require('./modules/proto__spark/index.coffee')
 
 keys__handlers = keys _handlers
 
-side__effects_factory = ({ Dispatch }) ->
+side__effects_factory = ({ Dispatch, c }) ->
 
 
     dispatch = (opts) ->

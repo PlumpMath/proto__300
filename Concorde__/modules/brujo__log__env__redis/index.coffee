@@ -21,10 +21,11 @@ getStateCache = ({ cb, ccc }) ->
 CCC_F = ({ arq }) ->
 
     ({ stuff }) ->
+        # structured logging functions in a way that's sync and fast on the write, can take a bit more on the collection and reduction on the startup phase.
         redis.set 'somewhere in cache state for logging', stuff?
 
 
 module.exports = ({ cb }) ->
-    arq = {}
+    arq = {} # can define some parameters to CCC_F if needed.
     ccc = CCC_F { arq }
     getStateCache { cb, ccc }
