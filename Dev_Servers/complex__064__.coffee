@@ -31,9 +31,9 @@ apa = do ->
     cookies = cookie_parser cookie__parser__secret
     cookie__parser__secret: cookie__parser__secret
     cookies: cookies
-    public_dir: path.resolve('..', '..', 'WebApps', 'Proto__Demo__006', 'public')
+    public_dir: path.resolve('..', 'WebApps', 'Proto__User', 'public')
     index_path: '/dev_index_.html'
-    primus_dir: path.resolve('..', '..', 'WebApps', 'Proto__Demo__006', 'public', 'js')
+    primus_dir: path.resolve('..', 'WebApps', 'Proto__User', 'public', 'js')
 
 # app__brujo__arq
 aba = do ->
@@ -41,9 +41,9 @@ aba = do ->
     cookies = cookie_parser cookie__parser__secret
     cookie__parser__secret: cookie__parser__secret
     cookies: cookies
-    public_dir: path.resolve('..', '..', 'WebApps', 'Brujo__Terminal__', 'public')
+    public_dir: path.resolve('..', 'WebApps', 'Brujo__Terminal', 'public')
     index_path: '/dev_index_.html'
-    primus_dir: path.resolve('..', '..', 'WebApps', 'Brujo__Terminal__', 'public', 'js')
+    primus_dir: path.resolve('..', 'WebApps', 'Brujo__Terminal', 'public', 'js')
 
 primus_session_F = require './primus_session_000_.coffee'
 
@@ -118,16 +118,18 @@ brujo__primus = new Primus(app_brujo_server, opts_brujo_primus)
 proto__primus.use 'cookies', apa.cookies
 brujo__primus.use 'cookies', aba.cookies
 
+
 proto__primus.use 'session', primus_session_F, { store: proto__redis__store }
 brujo__primus.use 'session', primus_session_F, { store: brujo__redis__store }
 
 proto__primus.save path.join(apa.primus_dir, '/primus.js')
 brujo__primus.save path.join(aba.primus_dir, '/primus.js')
 
-require('../Concorde__/index__.coffee')({ proto__primus, brujo__primus })
+
+require('../Concorde__/index__100__.coffee')({ proto__primus, brujo__primus })
 
 app_proto_server.listen app__proto__port, ->
-    c color.blue('⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒', on), color.cyan(app__proto__port, on)
+    co color.blue('⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒', on), color.cyan(app__proto__port, on)
 
 app_brujo_server.listen app__brujo__port, ->
-    c color.green('∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋', on), color.white(app__brujo__port, on)
+    co color.green('∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋', on), color.white(app__brujo__port, on)
