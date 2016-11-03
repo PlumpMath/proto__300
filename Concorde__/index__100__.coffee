@@ -24,6 +24,8 @@ module.exports = ({ proto__primus, brujo__primus }) ->
         action_counter = 0
         Dispatch.on 'new_action', ({ action }) ->
             co '\n ------' + color.white("#{action_counter++}", on)
+            c
+                stuff: " some great stuff possible with the redis cache and brujo-terminal maybe D3 graphhpics"
             wrapped_action = assign action,
                 concorde__timestamp : Date.now()
             State = reducer { State, c, action: wrapped_action }
