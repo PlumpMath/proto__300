@@ -74,6 +74,7 @@
         "superagent": "latest",
         "tunnel-ssh": "latest",
         "uglify-loader": "latest",
+        "webpack": "latest",
         "ws": "latest"
     }
 }
