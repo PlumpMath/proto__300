@@ -10,10 +10,19 @@ Redis = require 'ioredis'
 
 
 
-some_func_to_put_state__cache__into__immutable__state = ({ state__cache }) ->
+getCacheImm = ({ state__cache }) ->
+    # state_cache is assumed to be pretty raw unprocessed Redis derived data-structures.
+    # We process to Immutable structure ready for setIn() on State.
 
+    # Or maybe it could return a standard js object on which there are keyed immutable objects.
+    # So a log immutable object and an env.  These could be attached to different keys on the State obj.
+    Imm.Map({})
 
 module.exports = ({ state__cache, proto__primus, brujo__primus  }) ->
+
+
+
+
 
     init__wodehouse = Desire_Imm
         desire_id: 'init_wodehouse'
@@ -31,6 +40,12 @@ module.exports = ({ state__cache, proto__primus, brujo__primus  }) ->
 
 
     # Desires = Desires.setIn(["init_wodehouse"], x100)
+    stateCacheImm = getCacheImm { state__cache }
+
+
+    { Env_Imm, Log_Imm, Reg_State } = stateCacheImm
+
+    # maybe we would fold some stuff in like with the immutable version of assign.
 
 
     # Desires.set("init_wodehouse", init_wodehouse)
