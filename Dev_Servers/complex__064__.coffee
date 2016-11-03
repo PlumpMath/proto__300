@@ -4,7 +4,14 @@
 # nodemon --watch . --watch ../Concorde__029 complex__064__dev__.coffee
 # "
 
-c = console.log.bind console
+ttd__we_should_ = "
+We should pull the redis env state__cache grabbing function back to this file so env can affect config at this level,
+maybe including ports numbers and whatnot.
+The redis-written structured logging complex would then as well would be available at this root process level.
+
+"
+
+co = console.log.bind console
 color = require 'bash-color'
 body_parser = require 'body-parser'
 cookie_parser = require 'cookie-parser'
@@ -82,12 +89,12 @@ app__brujo.use '/fonts', express.static(path.join(aba.public_dir, '/fonts'))
 app__brujo.use '/svgs', express.static(path.join(aba.public_dir, '/svgs'))
 
 app__proto.all '/*', (req, res, next) ->
-    c color.red('................ ', on), color.cyan(keys(req), on)
+    co color.red('................ ', on), color.cyan(keys(req), on)
     # req.session.timestamp = Date.now()
     res.sendFile path.join(apa.public_dir, apa.index_path)
 
 app__brujo.all '/*', (req, res, next) ->
-    c color.blue('₪ℚℚℚℝℝℝℂℂℂℂℤℤℤℤ⇒ℚℚ˛∋∋∋∋∋∈∈∈∈∋∋∋', on), color.purple(keys(req), on)
+    co color.blue('₪ℚℚℚℝℝℝℂℂℂℂℤℤℤℤ⇒ℚℚ˛∋∋∋∋∋∈∈∈∈∋∋∋', on), color.purple(keys(req), on)
     res.sendFile path.join(aba.public_dir, aba.index_path)
 
 app__proto.use express.static(apa.public_dir)
