@@ -11,6 +11,9 @@ The redis-written structured logging complex would then as well would be availab
 
 "
 
+
+
+
 co = console.log.bind console
 color = require 'bash-color'
 body_parser = require 'body-parser'
@@ -24,6 +27,7 @@ Primus = require 'primus'
 {
     keys, assign, map, reduce
 } = _
+
 
 # app__proto__arq
 apa = do ->
@@ -118,13 +122,11 @@ brujo__primus = new Primus(app_brujo_server, opts_brujo_primus)
 proto__primus.use 'cookies', apa.cookies
 brujo__primus.use 'cookies', aba.cookies
 
-
 proto__primus.use 'session', primus_session_F, { store: proto__redis__store }
 brujo__primus.use 'session', primus_session_F, { store: brujo__redis__store }
 
 proto__primus.save path.join(apa.primus_dir, '/primus.js')
 brujo__primus.save path.join(aba.primus_dir, '/primus.js')
-
 
 require('../Concorde__/index__100__.coffee')({ proto__primus, brujo__primus })
 

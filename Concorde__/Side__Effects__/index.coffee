@@ -14,7 +14,6 @@ _handlers = assign _handlers, require('./modules/proto__primus/index.coffee')
 _handlers = assign _handlers, require('./modules/proto__redis/index.coffee')
 _handlers = assign _handlers, require('./modules/proto__spark/index.coffee')
 
-
 keys__handlers = keys _handlers
 
 side__effects_factory = ({ Dispatch, c }) ->
