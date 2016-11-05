@@ -11,10 +11,8 @@ get_state_cache = ({ go, c }) ->
             go { env }
 
 logging__func = ({ setup_opts }) ->
-
-    ({ stuff }) ->
-        more_likely = " We'll be writing to a list, just some message maybe a payload stringified (but is that expensive) "
-        redis.rpush "some cache address", stuff?
+    ( stuff ) ->
+        redis.lpush "log_cache", stuff
 
 module.exports = ({ go }) ->
     setup_opts = {}

@@ -12,10 +12,11 @@ Desire_Imm = ( opts ) ->
     desire_payload = opts.desire_payload or null
     # desire_intensity = opts.desire_intensity or 100
     desire_fulfilled = false
-    { desire_id, desire_type, desire_payload, desire_fulfilled }
+    Imm.fromJS { desire_id, desire_type, desire_payload, desire_fulfilled }
 
-add__desire = ({ State, ticket }) ->
-    desire = Desire_Imm ticket
-    State.setIn(['Desires', desire.desire_id], desire)
+
+add__desire = ({ State, desire }) ->
+    desire = Desire_Imm desire
+    State.setIn(['desires', desire.desire_id], desire)
 
 module.exports = { add__desire }
