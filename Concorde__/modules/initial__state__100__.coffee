@@ -18,10 +18,13 @@ state__cache__reducer = ({ state__cache }) ->
 module.exports = ({ c, state__cache, proto__primus, brujo__primus }) ->
     State = state__cache__reducer { state__cache }
     other_initial_state =
+        log_cache: Imm.List([])
         desires: Imm.Map({})
         redis : redis
         proto__primus : proto__primus
         brujo__primus : brujo__primus
+        brujo__sparks : Imm.Map({})
+        proto__sparks : Imm.Map({})
     State = assign State, other_initial_state
     State = Imm.fromJS State
     State = add__desire

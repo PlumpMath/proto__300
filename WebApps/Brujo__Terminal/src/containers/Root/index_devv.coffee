@@ -8,12 +8,31 @@ ready__mock = ->
     { ww , wh } = @props
     div null, "hello 38938838838838838383838"
 
+
+ready__sparse = rr
+    componentDidMount: ->
+        primus.on 'data', (data) =>
+            c 'data', data, @state
+            @setState
+                log_rayy : @state.log_rayy.concat(data.payload.log_rayy)
+    getInitialState: ->
+        log_rayy : []
+    render: ->
+        div null,
+            p null, 'there we are'
+            for item, idx in @state.log_rayy
+                p
+                    key: "p:#{idx}"
+                    "... and more #{item}"
+
+
 root_component = rr
     render: ->
         { ww , wh } = @props
         Provider
             store: store
-            ready__mock.bind(@)()
+            # ready__mock.bind(@)()
+            ready__sparse()
             # launch_index()
 
 set_and_render = ->

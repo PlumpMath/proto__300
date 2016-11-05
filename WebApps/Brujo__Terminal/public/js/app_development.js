@@ -51,7 +51,7 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Provider, ready__mock, root_component, root_el, set_and_render, store;
+	var Provider, ready__mock, ready__sparse, root_component, root_el, set_and_render, store;
 
 	__webpack_require__(2);
 
@@ -69,13 +69,46 @@
 	  return div(null, "hello 38938838838838838383838");
 	};
 
+	ready__sparse = rr({
+	  componentDidMount: function() {
+	    return primus.on('data', (function(_this) {
+	      return function(data) {
+	        c('data', data, _this.state);
+	        return _this.setState({
+	          log_rayy: _this.state.log_rayy.concat(data.payload.log_rayy)
+	        });
+	      };
+	    })(this));
+	  },
+	  getInitialState: function() {
+	    return {
+	      log_rayy: []
+	    };
+	  },
+	  render: function() {
+	    var idx, item;
+	    return div(null, p(null, 'there we are'), (function() {
+	      var i, len, ref, results;
+	      ref = this.state.log_rayy;
+	      results = [];
+	      for (idx = i = 0, len = ref.length; i < len; idx = ++i) {
+	        item = ref[idx];
+	        results.push(p({
+	          key: "p:" + idx
+	        }, "... and more " + item));
+	      }
+	      return results;
+	    }).call(this));
+	  }
+	});
+
 	root_component = rr({
 	  render: function() {
 	    var ref, wh, ww;
 	    ref = this.props, ww = ref.ww, wh = ref.wh;
 	    return Provider({
 	      store: store
-	    }, ready__mock.bind(this)());
+	    }, ready__sparse());
 	  }
 	});
 

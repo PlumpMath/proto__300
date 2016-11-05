@@ -11,6 +11,9 @@ _handlers = {}
 # _handlers = assign _handlers, require('./interfaces/whatever.coffee')
 _handlers = assign _handlers, require('./modules/desire__kill__.coffee')
 _handlers = assign _handlers, require('./modules/process_log_cache_.coffee')
+_handlers = assign _handlers, require('./modules/brujo__primus__.coffee')
+
+
 exports.unit__test__interface = _handlers
 
 keys__handlers = keys(_handlers)
