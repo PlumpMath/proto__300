@@ -1,6 +1,6 @@
 co = console.log.bind console
 _ = require 'lodash'
-{ keys, assign, map, reduce, includes, omit } = _
+{ keys, assign, map, reduce, includes, omit, keysIn } = _
 Imm = require 'immutable'
 uuid = require 'node-uuid'
 v4 = uuid.v4.bind uuid
@@ -16,7 +16,8 @@ Desire_Imm = ( opts ) ->
 
 
 add__desire = ({ State, desire }) ->
-    desire = Desire_Imm desire
-    State.setIn(['desires', desire.desire_id], desire)
+    desire_Imm = Desire_Imm desire
+    # co 'creaoted desire', desire_Imm.toJS()
+    State.setIn(['desires', desire_Imm.getIn(['desire_id'])], desire_Imm)
 
 module.exports = { add__desire }
