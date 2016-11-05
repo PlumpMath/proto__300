@@ -2,19 +2,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
 dev__server = ({ env }) ->
 
     { c, other__stuff } = env
-
     co = console.log.bind console
     color = require 'bash-color'
     body_parser = require 'body-parser'
@@ -28,7 +18,6 @@ dev__server = ({ env }) ->
     {
         keys, assign, map, reduce
     } = _
-
 
     # app__proto__arq
     apa = do ->
@@ -129,7 +118,10 @@ dev__server = ({ env }) ->
     proto__primus.save path.join(apa.primus_dir, '/primus.js')
     brujo__primus.save path.join(aba.primus_dir, '/primus.js')
 
-    require('../Concorde__/index__100__.coffee')({ proto__primus, brujo__primus })
+
+    { state__cache } = env
+
+    require('../Concorde__/index__100__.coffee')({ c, state__cache, proto__primus, brujo__primus })
 
     app_proto_server.listen app__proto__port, ->
         co color.blue('⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒', on), color.cyan(app__proto__port, on)
@@ -137,13 +129,10 @@ dev__server = ({ env }) ->
     app_brujo_server.listen app__brujo__port, ->
         co color.green('∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋', on), color.white(app__brujo__port, on)
 
-
 go = ({ env }) ->
-    { c , other__stuff } = env
     dev__server { env }
 
-
-require('../Concorde__/modules/Transcendents/index.coffee') { go }
+require('../Concorde__/modules/startup__transcendents__.coffee') { go }
 
 # invocation = "
 # nodemon --watch ../Concorde__029 complex__064__dev__.coffee

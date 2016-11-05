@@ -10,27 +10,19 @@ class Emitter extends EventEmitter
 Dispatch = new Emitter()
 process.setMaxListeners(10000)
 
-
 reducer = require('./Reducer/index.coffee').default
 
-module.exports = ({ proto__primus, brujo__primus }) ->
+module.exports = ({ c, state__cache, proto__primus, brujo__primus }) ->
 
-    dispatch = (opts) ->
-        Dispatch.emit 'new_action', {action: opts}
+    State = initial__state = require('./modules/initial__state__100__.coffee')({ c, state__cache, proto__primus, brujo__primus })
+    side__effects = require('./Side__Effects__/index.coffee').default({ Dispatch, c })
+    action_counter = 0
 
-    cb = ({ state__cache, c }) ->
-        State = initial__state = require('./modules/initial__state__.coffee')({ state__cache, proto__primus, brujo__primus })
-        side__effects = require('./Side__Effects/index.coffee').default({ Dispatch, c })
-        action_counter = 0
-        Dispatch.on 'new_action', ({ action }) ->
-            co '\n ------' + color.white("#{action_counter++}", on)
-            c
-                stuff: " some great stuff possible with the redis cache and brujo-terminal maybe D3 graphhpics"
-            wrapped_action = assign action,
-                concorde__timestamp : Date.now()
-            State = reducer { State, c, action: wrapped_action }
-            side__effects { State, c }
+    Dispatch.on 'new_action', ({ action }) ->
+        co '\n ------' + color.white("#{action_counter++}", on)
+        wrapped_action = assign action,
+            concorde__timestamp : Date.now()
+        State = reducer { c, State, action: wrapped_action }
+        side__effects { c, State }
 
-        side__effects { State, c }
-
-    require('./modules/brujo__log__env__redis/index.coffee') { cb }
+    side__effects { c, State }
