@@ -1,6 +1,6 @@
 co = console.log.bind console
 Redis = require 'ioredis'
-redis = new Redis()
+redis = new Redis({ db: 0 })
 
 parse__reduce__cache = ({ cache }) ->
 
