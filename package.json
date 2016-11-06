@@ -5,10 +5,12 @@
     "author": "Wylie Кулик",
     "version": "0.0.1",
     "scripts": {
-        "build:brujo-terminal:dev": "better-npm-run build:brujo-terminal:dev"
+        "build:brujo-terminal:dev": "better-npm-run build:brujo-terminal:dev",
+        "build:proto-user:dev": "better-npm-run build:proto-user:dev"
     },
     "betterScripts": {
-        "build:brujo-terminal:dev": "webpack -w --config ./WebApps/Brujo__Terminal/webpack/dev__pack__.coffee"
+        "build:brujo-terminal:dev": "webpack -w --config ./WebApps/Brujo__Terminal/webpack/dev__pack__.coffee",
+        "build:proto-user:dev": "webpack -w --config ./WebApps/Proto__User/webpack/dev__pack__.coffee"
     },
     "dependencies": {
         "async": "latest",

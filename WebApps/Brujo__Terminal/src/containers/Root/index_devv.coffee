@@ -23,7 +23,7 @@ ready__sparse = rr
             for item, idx in @state.log_rayy
                 p
                     key: "p:#{idx}"
-                    "... and more #{item}"
+                    "... and more   #{item}"
 
 
 root_component = rr

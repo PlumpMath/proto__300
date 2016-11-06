@@ -51,7 +51,7 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Provider, ready__mock, ready__sparse, root_component, root_el, set_and_render, store;
+	var Provider, ready__mock, root_component, root_el, set_and_render, store;
 
 	__webpack_require__(2);
 
@@ -61,46 +61,11 @@
 
 	store = __webpack_require__(216);
 
-	c('hi ?');
-
 	ready__mock = function() {
 	  var ref, wh, ww;
 	  ref = this.props, ww = ref.ww, wh = ref.wh;
-	  return div(null, "hello 38938838838838838383838");
+	  return div(null, p(null, "hello 38938838838838838383838"), p(null, 'Aastneuhsanteuhsanth'));
 	};
-
-	ready__sparse = rr({
-	  componentDidMount: function() {
-	    return primus.on('data', (function(_this) {
-	      return function(data) {
-	        c('data', data, _this.state);
-	        return _this.setState({
-	          log_rayy: _this.state.log_rayy.concat(data.payload.log_rayy)
-	        });
-	      };
-	    })(this));
-	  },
-	  getInitialState: function() {
-	    return {
-	      log_rayy: []
-	    };
-	  },
-	  render: function() {
-	    var idx, item;
-	    return div(null, p(null, 'there we are'), (function() {
-	      var i, len, ref, results;
-	      ref = this.state.log_rayy;
-	      results = [];
-	      for (idx = i = 0, len = ref.length; i < len; idx = ++i) {
-	        item = ref[idx];
-	        results.push(p({
-	          key: "p:" + idx
-	        }, "... and more   " + item));
-	      }
-	      return results;
-	    }).call(this));
-	  }
-	});
 
 	root_component = rr({
 	  render: function() {
@@ -108,7 +73,7 @@
 	    ref = this.props, ww = ref.ww, wh = ref.wh;
 	    return Provider({
 	      store: store
-	    }, ready__sparse());
+	    }, ready__mock.bind(this)());
 	  }
 	});
 
@@ -131,7 +96,7 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var a, body, circle, clipPath, code, d, defs, div, dom_stuff, ellipse, feBlend, feGaussianBlur, feMerge, feMergeNode, feOffset, filter, foreignObject, form, g, h1, h2, h3, h4, h5, h6, i, image, input, item, k, len, li, line, linearGradient, ol, p, path, pattern, polygon, polyline, pre, radialGradient, rect, ref, ref1, span, stop, strong, svg, tbody, text, textArea, th, thead, tr, tspan, ul, v;
+	var a, body, bursar, circle, clipPath, code, d, defs, div, dom_stuff, ellipse, feBlend, feGaussianBlur, feMerge, feMergeNode, feOffset, filter, foreignObject, form, g, h1, h2, h3, h4, h5, h6, i, image, input, item, k, len, li, line, linearGradient, ol, p, path, pattern, polygon, polyline, pre, radialGradient, rect, ref, ref1, span, stop, strong, svg, tbody, text, textArea, th, thead, tr, tspan, ul, v;
 
 	window.c = console.log.bind(console);
 
@@ -149,7 +114,27 @@
 
 	window.Immutable = __webpack_require__(215);
 
-	window.primus = new Primus('http://localhost:2229', {});
+	window.primus = new Primus('http://localhost:6484', {});
+
+	bursar = setInterval((function(_this) {
+	  return function() {
+	    return primus.write({
+	      event_type: 'gogogo'
+	    });
+	  };
+	})(this), 4000);
+
+	primus.on('data', function(data) {
+	  return c('have data', data);
+	});
+
+	setInterval((function(_this) {
+	  return function() {
+	    return primus.write({
+	      data_action_type: 'lomax'
+	    });
+	  };
+	})(this), 4000);
 
 	window.debounce = function(fn, wait, immediate) {
 	  var timeout;

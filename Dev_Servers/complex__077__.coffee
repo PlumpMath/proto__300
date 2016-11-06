@@ -129,10 +129,7 @@ dev__server = ({ env }) ->
     app_brujo_server.listen app__brujo__port, ->
         co color.green('∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋∋', on), color.white(app__brujo__port, on)
 
-go = ({ env }) ->
-    dev__server { env }
-
-require('../Concorde__/modules/startup__transcendents__.coffee') { go }
+require('../Concorde__/modules/startup__transcendents__.coffee') { dev__server }
 
 # invocation = "
 # nodemon --watch ../Concorde__029 complex__064__dev__.coffee
