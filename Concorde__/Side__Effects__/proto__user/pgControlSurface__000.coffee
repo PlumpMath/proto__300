@@ -8,14 +8,7 @@
 # set_last_login = "function"
 #
 #
-# config =
-#     user: "wylie"
-#     database: "glowlit_one_eleven"
-#     password: "terebinth"
-#     host: "localhost"
-#     port: 5432
-#     max: 10
-#     idleTimeoutMillis: 30000
+# config = {}
 #
 #
 #
