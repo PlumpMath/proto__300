@@ -1,11 +1,9 @@
-
-
-
-
-dev__server = ({ env }) ->
-
-    { c, other__stuff } = env
-    co = console.log.bind console
+dev__server = ({ env, cs, c, redis }) -> # c is dep for structured, use cs
+    # c = console.log.bind console
+    shortid = require 'shortid'
+    c = co = console.log.bind console # replace with c when structured moved to cs
+    uuid = require 'node-uuid'
+    v4 = uuid.v4.bind uuid
     color = require 'bash-color'
     body_parser = require 'body-parser'
     cookie_parser = require 'cookie-parser'
@@ -19,8 +17,7 @@ dev__server = ({ env }) ->
         keys, assign, map, reduce
     } = _
 
-    # app__proto__arq
-    apa = do ->
+    apa = do -> # app__proto__arq
         cookie__parser__secret = "nasntoeuhht34nh"
         cookies = cookie_parser cookie__parser__secret
         cookie__parser__secret: cookie__parser__secret
@@ -29,8 +26,7 @@ dev__server = ({ env }) ->
         index_path: '/dev_index_.html'
         primus_dir: path.resolve('..', 'WebApps', 'Proto__User', 'public', 'js')
 
-    # app__brujo__arq
-    aba = do ->
+    aba = do -> # app__brujo__arq
         cookie__parser__secret = "nashtndnthd34nh"
         cookies = cookie_parser cookie__parser__secret
         cookie__parser__secret: cookie__parser__secret
@@ -83,19 +79,18 @@ dev__server = ({ env }) ->
     app__brujo.use '/svgs', express.static(path.join(aba.public_dir, '/svgs'))
 
     app__proto.all '/*', (req, res, next) ->
-        co color.red('................ ', on), color.cyan(keys(req), on)
-        # req.session.timestamp = Date.now()
+        if not(includes(keys(req.cookies), 'caracal'))
+            res.cookie 'caracal', "eureka::#{v4()}"
         res.sendFile path.join(apa.public_dir, apa.index_path)
 
     app__brujo.all '/*', (req, res, next) ->
-        co color.blue('₪ℚℚℚℝℝℝℂℂℂℂℤℤℤℤ⇒ℚℚ˛∋∋∋∋∋∈∈∈∈∋∋∋', on), color.purple(keys(req), on)
         res.sendFile path.join(aba.public_dir, aba.index_path)
 
     app__proto.use express.static(apa.public_dir)
     app__brujo.use express.static(aba.public_dir)
 
-    app__proto__port = 6484
-    app__brujo__port = 2229
+    app__proto__port = 6494
+    app__brujo__port = 2239
 
     app_proto_server = http.createServer app__proto
     app_brujo_server = http.createServer app__brujo
@@ -109,6 +104,9 @@ dev__server = ({ env }) ->
     proto__primus = new Primus(app_proto_server, opts_proto_primus)
     brujo__primus = new Primus(app_brujo_server, opts_brujo_primus)
 
+    # proto__primus.plugin 'mirage', require('mirage')
+    # primus.plugin('mirage', require('mirage'))
+
     proto__primus.use 'cookies', apa.cookies
     brujo__primus.use 'cookies', aba.cookies
 
@@ -118,10 +116,9 @@ dev__server = ({ env }) ->
     proto__primus.save path.join(apa.primus_dir, '/primus.js')
     brujo__primus.save path.join(aba.primus_dir, '/primus.js')
 
+    # { state__cache } = env or {}
 
-    { state__cache } = env
-
-    require('../Concorde__/index__100__.coffee')({ c, state__cache, proto__primus, brujo__primus })
+    require('../Concorde__/index__810__.coffee')({ cs, c, env, proto__primus, brujo__primus, redis })
 
     app_proto_server.listen app__proto__port, ->
         co color.blue('⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒', on), color.cyan(app__proto__port, on)

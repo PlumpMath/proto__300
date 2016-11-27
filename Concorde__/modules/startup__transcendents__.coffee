@@ -1,20 +1,16 @@
-co = console.log.bind console
+c = console.log.bind console
 Redis = require 'ioredis'
-redis = new Redis({ db: 0 })
+redis = new Redis({ db: 3, dropBufferSupport: true })
 
-parse__reduce__cache = ({ cache }) ->
+logging__func_F = ({ env, dev__server }) ->
+    cs = ( stuff ) ->
+        redis.lpush 'log_cache', JSON.stringify(stuff)
+    dev__server { cs, env, redis }
 
-get_state_cache = ({ dev__server, c }) ->
-    redis.get 'state__cache', (err, state__cache) ->
-        if err then co err else
-            env = { state__cache, c }
-            dev__server { env }
-
-logging__func = ({ setup_opts }) ->
-    ( stuff ) ->
-        redis.lpush "log_cache", stuff
+get_state_cache = ({ logging__func_F, dev__server }) ->
+    redis.hgetall 'env', (err, env) ->
+        if err then c err else
+            logging__func_F { env, dev__server }
 
 module.exports = ({ dev__server }) ->
-    setup_opts = {}
-    c = logging__func { setup_opts }
-    get_state_cache  { dev__server, c }
+    get_state_cache { logging__func_F, dev__server }

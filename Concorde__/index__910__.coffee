@@ -23,5 +23,4 @@ module.exports = ({ cs, state__cache, proto__primus, brujo__primus, redis }) ->
         State = reducer { cs, State, action }
         side__effects { cs, State }
 
-
     side__effects { cs, State }
