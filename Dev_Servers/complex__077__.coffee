@@ -118,7 +118,7 @@ dev__server = ({ env, cs, c, redis }) -> # c is dep for structured, use cs
 
     # { state__cache } = env or {}
 
-    require('../Concorde__/index__810__.coffee')({ cs, c, env, proto__primus, brujo__primus, redis })
+    require('../Concorde__/index__910__.coffee')({ cs, env, proto__primus, brujo__primus, redis })
 
     app_proto_server.listen app__proto__port, ->
         co color.blue('⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒⇒', on), color.cyan(app__proto__port, on)

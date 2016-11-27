@@ -1,23 +1,19 @@
 
 
-
-require './modules/globals.coffee'
-
 EventEmitter = require 'events'
 class Emitter extends EventEmitter
 Dispatch = new Emitter()
 
 process.setMaxListeners 10000
 
-reducer = require('./Reducer__.coffee')
-
-module.exports = ({ cs, state__cache, proto__primus, brujo__primus, redis }) ->
+module.exports = ({ cs, env, state__cache, proto__primus, brujo__primus, redis }) ->
 
     State = require('./modules/initial__state__884__.coffee') {
-        cs, state__cache, proto__primus, brujo__primus, redis
+        cs, env, state__cache, proto__primus, brujo__primus, redis
     }
-
-    side__effects = require('./Side__Effects__.coffee').default({ Dispatch, cs })
+    reducer = require('./Reducer__.coffee') # todo make a factory parametrised by env
+    require './modules/globals.coffee' # todo make this a factory parametrised by env
+    side__effects = require('./Side__Effects__.coffee').default({ Dispatch, cs, env })
 
     Dispatch.on 'new_action', ({ action }) ->
         State = reducer { cs, State, action }

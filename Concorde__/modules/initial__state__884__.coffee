@@ -19,15 +19,10 @@ module.exports = ({
 
     Primary__State =
         log_cache : log_cache
-
         desires : desires
-
         ufo__sessions : Imm.Map({})
-
         proto__sessions : Imm.Map({})
-
         sundry__list : Imm.List([])
-
         proto__primus : proto__primus
         brujo__primus : brujo__primus
 
