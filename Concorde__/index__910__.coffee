@@ -11,7 +11,6 @@ process.setMaxListeners 10000
 
 reducer = require('./Reducer__.coffee')
 
-
 module.exports = ({ cs, state__cache, proto__primus, brujo__primus, redis }) ->
 
     State = require('./modules/initial__state__884__.coffee') {
