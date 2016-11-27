@@ -7,7 +7,7 @@ v4 = uuid.v4.bind uuid
 _ = require 'lodash'
 { assign, map, reduce, keys, includes } = _
 Redis = require 'ioredis'
-redis = new Redis()
+redis = new Redis({ db: 0 })
 
 a_more_truly = " advanced system would allow us to open new ports (for maybe new webapps) and primus instances on the fly, but we can probably defer this clever trick until much later, even though implementation probably not so complex. In this version we are stuck with just the two, proto and brujo, totally sufficient with our more modest use cases."
 
