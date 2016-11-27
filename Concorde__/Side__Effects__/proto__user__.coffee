@@ -30,11 +30,8 @@ user_hash_f = ({ email_candide, hash }) ->
 
 user_summary_f = ({ owner_id })->
     meta_owner_id: owner_id
-    reports: 0
+    some_user_property: 0
     credits: 100
-    sales_reported: 0
-    volume_reported: 0
-    value_reported: 0
     last_login: Date.now()
 
 arq = {}
@@ -248,3 +245,20 @@ arq['submit_signup_form'] = ({ cs, State, dispatch, desire }) ->
         cb: (err, re) =>
             if re is 0
                 signup_handle_form_accept.bind(car)()
+
+
+arq['check_is_email_valid_and_avail'] = ({ cs, State, dispatch, desire }) ->
+    { email_candide, session_metadata, spark_id } = desire.payload
+    spark = State.getIn ['proto__sparks', spark_id]
+    redis.sismember 'active_accounts', email_candide, (err, re) ->
+        if err then c err else
+            dispatch
+                type: 'email_check_returns'
+                re: re
+            spark.write
+                type: 'email_check_returns'
+                payload:
+                    re: re
+
+
+module.exports = arq
